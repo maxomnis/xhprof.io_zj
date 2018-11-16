@@ -27,14 +27,14 @@ DROP TABLE IF EXISTS `calls`;
 
 CREATE TABLE `calls` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `request_id` int(10) unsigned NOT NULL,
-  `ct` int(10) unsigned DEFAULT NULL,
-  `wt` int(10) unsigned DEFAULT NULL,
-  `cpu` int(10) unsigned DEFAULT NULL,
-  `mu` int(10) unsigned DEFAULT NULL,
-  `pmu` int(10) unsigned DEFAULT NULL,
-  `caller_id` int(10) unsigned DEFAULT NULL,
-  `callee_id` int(10) unsigned NOT NULL,
+  `request_id` bigint(10) unsigned NOT NULL,
+  `ct` bigint(10)  DEFAULT NULL,
+  `wt` bigint(10)  DEFAULT NULL,
+  `cpu` bigint(10)  DEFAULT NULL,
+  `mu` bigint(10)  DEFAULT NULL,
+  `pmu` bigint(10)  DEFAULT NULL,
+  `caller_id` int(10)  DEFAULT NULL,
+  `callee_id` int(10)  NOT NULL,
   PRIMARY KEY (`id`),
   KEY `request_id` (`request_id`),
   CONSTRAINT `calls_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE
@@ -120,12 +120,12 @@ CREATE TABLE `request_uris` (
 DROP TABLE IF EXISTS `requests`;
 
 CREATE TABLE `requests` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `request_host_id` int(10) unsigned NOT NULL,
-  `request_uri_id` int(10) unsigned NOT NULL,
-  `request_method_id` int(10) unsigned NOT NULL,
-  `request_caller_id` int(10) unsigned NOT NULL,
-  `https` tinyint(3) unsigned NOT NULL,
+  `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `request_host_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `request_uri_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `request_method_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `request_caller_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `https` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `request_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `request_host_id` (`request_host_id`),
